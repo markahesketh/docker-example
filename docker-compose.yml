@@ -1,0 +1,78 @@
+version: "3.7"
+
+services:
+  repo1:
+    build:
+      context: .
+      dockerfile: .docker/nginx/Dockerfile
+    ports:
+      - 8081:80
+    volumes:
+      - ./repo1:/app
+
+  repo2:
+    build:
+      context: .
+      dockerfile: .docker/nginx/Dockerfile
+    ports:
+      - 8082:80
+    volumes:
+      - ./repo2:/app
+
+  repo3:
+    build:
+      context: .
+      dockerfile: .docker/nginx/Dockerfile
+    ports:
+      - 8083:80
+    volumes:
+      - ./repo3:/app
+
+  repo4:
+    build:
+      context: .
+      dockerfile: .docker/nginx/Dockerfile
+    ports:
+      - 8084:80
+    volumes:
+      - ./repo4:/app
+
+  repo5:
+    build:
+      context: .
+      dockerfile: .docker/nginx/Dockerfile
+    ports:
+      - 8085:80
+    volumes:
+      - ./repo5:/app
+
+  db1:
+    image: mariadb:10.5.1
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE_1}
+      - MYSQL_USER=${MYSQL_USER_1}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD_1}
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - 33061:3306
+    volumes:
+      - db-data1:/var/lib/mysql
+
+  db2:
+    image: mariadb:10.5.1
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE_2}
+      - MYSQL_USER=${MYSQL_USER_2}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD_2}
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - 33062:3306
+    volumes:
+      - db-data2:/var/lib/mysql
+
+  redis:
+    image: redis:5.0.7-alpine
+
+volumes:
+  db-data1:
+  db-data2:
